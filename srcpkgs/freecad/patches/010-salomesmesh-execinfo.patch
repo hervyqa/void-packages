@@ -1,16 +1,18 @@
 --- a/src/3rdParty/salomesmesh/src/DriverSTL/Basics_Utils.cpp
 +++ b/src/3rdParty/salomesmesh/src/DriverSTL/Basics_Utils.cpp
-@@ -29,7 +29,9 @@
+@@ -29,9 +29,10 @@
  #ifndef WIN32
  #include <unistd.h>
  #include <sys/stat.h>
 +#ifdef __GLIBC__
  #include <execinfo.h>
-+#endif
  #endif
+-
++#endif
  
- 
-@@ -109,6 +111,7 @@
+ namespace Kernel_Utils
+ {
+@@ -109,6 +110,7 @@ namespace Kernel_Utils
  #ifndef WIN32
    void print_traceback()
    {
@@ -18,11 +20,11 @@
      void *array[50];
      size_t size;
      char **strings;
-@@ -123,6 +126,9 @@
+@@ -123,6 +125,9 @@ namespace Kernel_Utils
        }
  
      free (strings);
-+#else     
++#else
 +   std::cerr << "sorry, no backtrace on musl libc";
 +#endif
    }
